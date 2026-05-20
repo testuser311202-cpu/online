@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spotles — We Pick, We Clean, We Deliver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --white: #ffffff;
+    --off-white: #f0fbfd;
+    --black: #0d1f2d;
+    --charcoal: #132433;
+    --mid: #2e4a5c;
+    --muted: #7a9bac;
+    --accent: #00c4e0;
+    --accent-light: #7de8f5;
+    --accent-deep: #0098b5;
+    --blue: #0d3d55;
+    --blue-light: #0fa3c2;
+    --surface: #e0f7fc;
+    --border: #b2e8f2;
+    --red: #c0392b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5%;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: var(--black);
+    text-decoration: none;
+    position: relative;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: var(--mid);
+    font-size: .88rem; font-weight: 500; letter-spacing: .5px;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--accent-deep); }
+
+  .nav-cta {
+    background: var(--black); color: var(--white);
+    border: none; padding: 11px 26px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .88rem; font-weight: 600; letter-spacing: .5px;
+    cursor: pointer; border-radius: 4px;
+    transition: background .2s, transform .15s;
+  }
+  .nav-cta:hover { background: var(--accent-deep); transform: translateY(-1px); }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--black); border-radius: 2px;
+    transition: all .3s;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 5% 80px;
+    background: var(--white);
+    position: relative; overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(0,196,224,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(13,61,85,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0; opacity: .04;
+    background-image:
+      linear-gradient(var(--black) 1px, transparent 1px),
+      linear-gradient(90deg, var(--black) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 6px 14px; border-radius: 50px;
+    font-size: .78rem; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--accent-deep);
+    margin-bottom: 28px;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(1.4); }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: .95;
+    letter-spacing: 2px;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+  .hero h1 .accent { color: var(--accent); }
+
+  .hero-tagline {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(.8rem, 2vw, 1rem);
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    border-left: 3px solid var(--accent);
+    padding-left: 14px;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem; color: var(--mid);
+    line-height: 1.7; max-width: 520px;
+    margin-bottom: 44px;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--black); color: var(--white);
+    border: 2px solid var(--black); padding: 15px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .95rem; font-weight: 700; letter-spacing: .5px;
+    cursor: pointer; border-radius: 4px;
+    transition: all .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--accent-deep); border-color: var(--accent-deep);
+    transform: translateY(-2px); box-shadow: 0 8px 24px rgba(160,128,58,.3);
+  }
+
+  .btn-outline {
+    background: transparent; color: var(--black);
+    border: 2px solid var(--border); padding: 15px 30px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .95rem; font-weight: 600;
+    cursor: pointer; border-radius: 4px;
+    transition: all .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover {
+    border-color: var(--black);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    margin-top: 60px;
+    display: flex; gap: 40px; flex-wrap: wrap;
+  }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem; color: var(--black); letter-spacing: 1px;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-size: .78rem; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--muted); font-weight: 500;
+  }
+
+  /* car image right side */
+  .hero-visual {
+    position: absolute; right: -2%; top: 50%;
+    transform: translateY(-50%);
+    width: clamp(320px, 48%, 640px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-visual .car-shape {
+    width: 100%;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.15));
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--black); color: var(--white);
+    padding: 14px 0; overflow: hidden;
+    border-top: 1px solid #0d3d55; border-bottom: 1px solid #0d3d55;
+  }
+  .ticker-inner {
+    display: flex; gap: 0;
+    white-space: nowrap;
+    animation: ticker 25s linear infinite;
+  }
+  .ticker-item {
+    display: inline-flex; align-items: center; gap: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: .78rem; letter-spacing: 2px;
+    text-transform: uppercase; padding: 0 40px;
+    color: #aaa;
+  }
+  .ticker-dot { color: var(--accent); font-size: 1.2rem; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 5%; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: .72rem; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent-deep);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    letter-spacing: 1px;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .section-desc {
+    font-size: 1rem; color: var(--mid);
+    line-height: 1.7; max-width: 560px;
+  }
+
+  /* ── WHY US ── */
+  .why { background: var(--off-white); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px; margin-top: 56px;
+    border: 2px solid var(--black);
+  }
+
+  .why-card {
+    background: var(--white);
+    padding: 36px 28px;
+    border: 1px solid var(--border);
+    transition: all .3s;
+    position: relative; overflow: hidden;
+  }
+  .why-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .35s;
+  }
+  .why-card:hover { background: var(--black); }
+  .why-card:hover .why-icon { background: var(--accent); color: var(--black); }
+  .why-card:hover .why-title { color: var(--white); }
+  .why-card:hover .why-text { color: #999; }
+  .why-card:hover::after { transform: scaleX(1); }
+
+  .why-icon {
+    width: 52px; height: 52px;
+    background: var(--black); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; border-radius: 4px;
+    margin-bottom: 20px;
+    transition: all .3s;
+  }
+
+  .why-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--black); margin-bottom: 10px;
+    transition: color .3s;
+  }
+  .why-text {
+    font-size: .88rem; color: var(--muted);
+    line-height: 1.6; transition: color .3s;
+  }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px; margin-top: 56px;
+  }
+
+  .service-card {
+    border: 2px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+    transition: all .3s; position: relative;
+    background: var(--white);
+  }
+  .service-card:hover {
+    border-color: var(--black);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  }
+  .service-card.featured {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .service-badge {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--accent); color: var(--black);
+    font-size: .7rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 50px;
+  }
+
+  .service-icon-wrap {
+    background: var(--surface); padding: 40px 28px 28px;
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  .service-icon {
+    width: 60px; height: 60px;
+    background: var(--black); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; border-radius: 8px; flex-shrink: 0;
+  }
+
+  .service-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: 1px; color: var(--black);
+  }
+  .service-subtitle {
+    font-size: .82rem; color: var(--muted); margin-top: 2px;
+  }
+
+  .service-body { padding: 24px 28px; }
+
+  .service-features {
+    list-style: none; display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 24px;
+  }
+  .service-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: .88rem; color: var(--mid);
+  }
+  .service-features li::before {
+    content: '✓'; color: var(--accent-deep);
+    font-weight: 700; font-size: .9rem; flex-shrink: 0;
+  }
+
+  .service-price {
+    display: flex; align-items: baseline; gap: 4px;
+  }
+  .price-currency {
+    font-size: .9rem; color: var(--muted);
+    font-weight: 500;
+  }
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; color: var(--black); letter-spacing: 1px;
+  }
+  .price-note {
+    font-size: .78rem; color: var(--muted); margin-left: 4px;
+  }
+
+  .service-book {
+    width: 100%; margin-top: 20px;
+    background: var(--black); color: var(--white);
+    border: 2px solid var(--black);
+    padding: 13px; font-family: 'DM Sans', sans-serif;
+    font-size: .9rem; font-weight: 700; letter-spacing: .5px;
+    cursor: pointer; border-radius: 4px;
+    transition: all .2s;
+  }
+  .service-book:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .service-card.featured .service-book {
+    background: var(--accent-deep); border-color: var(--accent-deep);
+  }
+  .service-card.featured .service-book:hover { background: var(--black); border-color: var(--black); }
+
+  /* ── HOW IT WORKS ── */
+  .how { background: var(--black); color: var(--white); }
+  .how .section-label { color: var(--accent); }
+  .how .section-title { color: var(--white); }
+  .how .section-desc { color: #888; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0; margin-top: 60px;
+    position: relative;
+  }
+
+  .step {
+    padding: 40px 28px;
+    border: 1px solid #0d3d55;
+    position: relative;
+    transition: background .3s;
+  }
+  .step:hover { background: #0d2233; }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem; color: #0d3d55; letter-spacing: 2px;
+    line-height: 1; margin-bottom: 12px;
+    transition: color .3s;
+  }
+  .step:hover .step-num { color: var(--accent); }
+
+  .step-icon {
+    font-size: 1.8rem; margin-bottom: 16px;
+  }
+
+  .step-title {
+    font-weight: 700; font-size: 1rem;
+    color: var(--white); margin-bottom: 8px;
+  }
+
+  .step-text {
+    font-size: .85rem; color: #5a8a9f;
+    line-height: 1.6;
+  }
+
+  /* ── PICKUP BANNER ── */
+  .pickup-banner {
+    background: var(--accent);
+    padding: 60px 5%;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 32px; flex-wrap: wrap;
+  }
+
+  .pickup-text h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--black); letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .pickup-text p {
+    font-size: .95rem; color: rgba(0,0,0,0.6);
+    max-width: 480px; line-height: 1.6;
+  }
+
+  .pickup-chips {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px;
+  }
+  .chip {
+    background: rgba(0,0,0,0.12); color: var(--black);
+    border-radius: 50px; padding: 6px 16px;
+    font-size: .8rem; font-weight: 600; letter-spacing: .5px;
+  }
+
+  .pickup-cta {
+    background: var(--black); color: var(--white);
+    border: none; padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    cursor: pointer; border-radius: 4px;
+    white-space: nowrap; transition: all .2s;
+    flex-shrink: 0;
+  }
+  .pickup-cta:hover { background: var(--charcoal); transform: translateY(-2px); }
+
+  /* ── BOOKING FORM ── */
+  .booking { background: var(--off-white); }
+
+  .booking-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px; margin-top: 56px; align-items: start;
+  }
+
+  .booking-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; letter-spacing: 1px;
+    color: var(--black); margin-bottom: 16px;
+  }
+  .booking-info p {
+    font-size: .92rem; color: var(--mid);
+    line-height: 1.7; margin-bottom: 32px;
+  }
+
+  .info-point {
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 20px;
+  }
+  .info-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: var(--black); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; border-radius: 4px;
+  }
+  .info-title {
+    font-weight: 700; font-size: .92rem;
+    color: var(--black); margin-bottom: 3px;
+  }
+  .info-sub {
+    font-size: .82rem; color: var(--muted);
+  }
+
+  .form-card {
+    background: var(--white);
+    border: 2px solid var(--black);
+    border-radius: 8px; padding: 40px;
+    box-shadow: 8px 8px 0 var(--black);
+  }
+
+  .form-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; letter-spacing: 1px;
+    color: var(--black); margin-bottom: 8px;
+  }
+  .form-subtitle {
+    font-size: .85rem; color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .form-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex; flex-direction: column; gap: 7px;
+    margin-bottom: 18px;
+  }
+
+  .form-label {
+    font-size: .8rem; font-weight: 600;
+    letter-spacing: .5px; text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 4px; padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .92rem; color: var(--black);
+    transition: border-color .2s, box-shadow .2s;
+    width: 100%;
+    appearance: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--black);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    background: var(--white);
+  }
+  .form-select-wrap {
+    position: relative;
+  }
+  .form-select-wrap::after {
+    content: '▾';
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    pointer-events: none; color: var(--muted); font-size: .9rem;
+  }
+  .form-textarea { resize: vertical; min-height: 80px; }
+
+  .location-hint {
+    font-size: .75rem; color: var(--muted); margin-top: 4px;
+  }
+  .location-hint a { color: var(--accent-deep); }
+
+  .form-submit {
+    width: 100%; background: var(--black); color: var(--white);
+    border: 2px solid var(--black); padding: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: .5px;
+    cursor: pointer; border-radius: 4px;
+    transition: all .25s; margin-top: 8px;
+    position: relative;
+  }
+  .form-submit:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+  .form-submit:disabled { opacity: .6; cursor: not-allowed; }
+
+  .form-note {
+    text-align: center; margin-top: 14px;
+    font-size: .78rem; color: var(--muted);
+  }
+
+  /* success / error */
+  .form-alert {
+    display: none;
+    padding: 14px 18px; border-radius: 4px;
+    font-size: .88rem; font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .form-alert.success {
+    background: #f0faf4; border: 1.5px solid #6abf8a;
+    color: #236b47; display: flex; align-items: center; gap: 8px;
+  }
+  .form-alert.error {
+    background: #fff5f5; border: 1.5px solid #f5a5a5;
+    color: var(--red); display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal); color: var(--white);
+    padding: 64px 5% 32px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; letter-spacing: 3px;
+    color: var(--white); margin-bottom: 14px;
+  }
+  .footer-logo span { color: var(--accent); }
+
+  .footer-desc {
+    font-size: .88rem; color: #888; line-height: 1.7;
+    max-width: 320px; margin-bottom: 20px;
+  }
+
+  .footer-contact { display: flex; flex-direction: column; gap: 8px; }
+  .footer-contact a {
+    font-size: .88rem; color: #aaa;
+    text-decoration: none; transition: color .2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .footer-contact a:hover { color: var(--accent); }
+
+  .footer-col h4 {
+    font-family: 'Space Mono', monospace;
+    font-size: .72rem; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a {
+    font-size: .88rem; color: #888;
+    text-decoration: none; transition: color .2s;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+
+  .footer-bottom {
+    border-top: 1px solid #0d3d55;
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-size: .8rem; color: #4a7a8a; }
+  .footer-partner {
+    font-size: .78rem; color: #4a7a8a;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .footer-partner span { color: var(--accent); }
+
+  /* ── MOBILE NAV MENU ── */
+  .mobile-menu {
+    display: none; position: fixed;
+    inset: 0; z-index: 99;
+    background: var(--white);
+    flex-direction: column;
+    padding: 100px 5% 40px;
+    gap: 32px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem; letter-spacing: 2px;
+    color: var(--black); text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    transition: color .2s;
+  }
+  .mobile-menu a:hover { color: var(--accent-deep); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-cta-desktop { display: none; }
+    .hamburger { display: flex; }
+
+    .hero { padding-top: 100px; }
+    .hero-visual { display: none; }
+    .hero h1 { font-size: clamp(3.5rem, 14vw, 6rem); }
+
+    .booking-wrap { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 72px 5%; }
+
+    .hero { padding: 100px 5% 60px; }
+    .hero h1 { font-size: clamp(3rem, 16vw, 5rem); }
+    .hero-stats { gap: 24px; }
+
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+
+    .pickup-banner { flex-direction: column; text-align: center; }
+    .pickup-chips { justify-content: center; }
+
+    .form-card { padding: 28px 20px; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+  .reveal-delay-4 { transition-delay: .4s; }
+
+  /* loading spinner */
+  .spinner {
+    display: inline-block; width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,.3);
+    border-radius: 50%; border-top-color: var(--white);
+    animation: spin .7s linear infinite;
+    vertical-align: middle; margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Spot<span>les</span></a>
+  <ul class="nav-links">
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#booking">Book Now</a></li>
+  </ul>
+  <button class="nav-cta nav-cta-desktop" onclick="scrollToBooking()">Book a Wash</button>
+  <button class="hamburger" id="menuBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#why" onclick="closeMenu()">Why Us</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#how" onclick="closeMenu()">How It Works</a>
+  <a href="#booking" onclick="closeMenu()">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">📍 Serving All of Guwahati</div>
+    <h1>YOUR CAR.<br/>YOUR <span class="accent">TIME.</span><br/>SORTED.</h1>
+    <p class="hero-tagline">We Pick · We Clean · We Deliver</p>
+    <p class="hero-desc">Premium car wash & detailing at your doorstep. Free pickup and drop. Partner-certified cleaning centers. No need to leave home or office.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Book Your Wash →</a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">500<span>+</span></span>
+        <span class="stat-label">Happy Cars</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4.9<span>★</span></span>
+        <span class="stat-label">Customer Rating</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100<span>%</span></span>
+        <span class="stat-label">Free Pickup & Drop</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <!-- Inline SVG car illustration -->
+    <svg class="car-shape" viewBox="0 0 700 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- body shadow -->
+      <ellipse cx="350" cy="330" rx="280" ry="20" fill="rgba(0,0,0,0.08)"/>
+      <!-- car body -->
+      <path d="M80 240 L80 200 Q80 185 95 185 L185 185 L240 120 Q255 100 280 100 L420 100 Q450 100 470 120 L525 185 L615 185 Q630 185 630 200 L630 240 Q630 255 615 255 L95 255 Q80 255 80 240Z" fill="#1a1a1a"/>
+      <!-- roof -->
+      <path d="M240 120 Q255 100 280 100 L420 100 Q450 100 470 120 L525 185 L185 185 Z" fill="#2a2a2a"/>
+      <!-- windows -->
+      <path d="M248 130 L290 115 Q300 112 310 112 L390 112 Q400 112 410 115 L452 130 L460 175 L248 175 Z" fill="#8dd4f7" opacity=".7"/>
+      <!-- window divider -->
+      <line x1="354" y1="112" x2="354" y2="175" stroke="#1a1a1a" stroke-width="3"/>
+      <!-- wheels -->
+      <circle cx="190" cy="255" r="48" fill="#111"/>
+      <circle cx="190" cy="255" r="34" fill="#333"/>
+      <circle cx="190" cy="255" r="18" fill="#888"/>
+      <circle cx="190" cy="255" r="7" fill="#ccc"/>
+      <circle cx="520" cy="255" r="48" fill="#111"/>
+      <circle cx="520" cy="255" r="34" fill="#333"/>
+      <circle cx="520" cy="255" r="18" fill="#888"/>
+      <circle cx="520" cy="255" r="7" fill="#ccc"/>
+      <!-- headlights -->
+      <rect x="82" y="200" width="28" height="14" rx="3" fill="#fff9c4" opacity=".9"/>
+      <rect x="85" y="215" width="22" height="6" rx="2" fill="#ffd700" opacity=".6"/>
+      <!-- tail lights -->
+      <rect x="598" y="200" width="26" height="14" rx="3" fill="#ff4444" opacity=".85"/>
+      <!-- door lines -->
+      <line x1="354" y1="185" x2="354" y2="252" stroke="#333" stroke-width="2"/>
+      <line x1="278" y1="185" x2="265" y2="252" stroke="#333" stroke-width="1.5"/>
+      <line x1="432" y1="185" x2="445" y2="252" stroke="#333" stroke-width="1.5"/>
+      <!-- door handles -->
+      <rect x="295" y="220" width="24" height="5" rx="2.5" fill="#555"/>
+      <rect x="385" y="220" width="24" height="5" rx="2.5" fill="#555"/>
+      <!-- aqua accent stripe -->
+      <path d="M95 195 L615 195" stroke="#00c4e0" stroke-width="2.5" opacity=".5"/>
+      <!-- water sparkles -->
+      <circle cx="60" cy="160" r="4" fill="#00c4e0" opacity=".7">
+        <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" begin="0s"/>
+        <animate attributeName="cy" values="160;140;160" dur="2s" repeatCount="indefinite" begin="0s"/>
+      </circle>
+      <circle cx="640" cy="130" r="5" fill="#7de8f5" opacity=".6">
+        <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite" begin=".5s"/>
+        <animate attributeName="cy" values="130;108;130" dur="2.5s" repeatCount="indefinite" begin=".5s"/>
+      </circle>
+      <circle cx="350" cy="80" r="3.5" fill="#00c4e0" opacity=".8">
+        <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite" begin="1s"/>
+        <animate attributeName="cy" values="80;60;80" dur="1.8s" repeatCount="indefinite" begin="1s"/>
+      </circle>
+      <circle cx="200" cy="90" r="3" fill="#7de8f5" opacity=".6">
+        <animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite" begin=".3s"/>
+        <animate attributeName="cy" values="90;70;90" dur="2.2s" repeatCount="indefinite" begin=".3s"/>
+      </circle>
+      <circle cx="490" cy="75" r="4" fill="#00c4e0" opacity=".65">
+        <animate attributeName="opacity" values="0;1;0" dur="2.8s" repeatCount="indefinite" begin=".8s"/>
+        <animate attributeName="cy" values="75;52;75" dur="2.8s" repeatCount="indefinite" begin=".8s"/>
+      </circle>
+    </svg>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner" id="tickerInner">
+    <span class="ticker-item">✦ Free Pickup &amp; Drop</span>
+    <span class="ticker-item">✦ Serving All Guwahati</span>
+    <span class="ticker-item">✦ Professional Detailing</span>
+    <span class="ticker-item">✦ Partner Certified Centers</span>
+    <span class="ticker-item">✦ Basic Wash from ₹449</span>
+    <span class="ticker-item">✦ No Need to Visit</span>
+    <span class="ticker-item">✦ Verified Drivers</span>
+    <span class="ticker-item">✦ 4.9★ Rated Service</span>
+    <span class="ticker-item">✦ Free Pickup &amp; Drop</span>
+    <span class="ticker-item">✦ Serving All Guwahati</span>
+    <span class="ticker-item">✦ Professional Detailing</span>
+    <span class="ticker-item">✦ Partner Certified Centers</span>
+    <span class="ticker-item">✦ Basic Wash from ₹449</span>
+    <span class="ticker-item">✦ No Need to Visit</span>
+    <span class="ticker-item">✦ Verified Drivers</span>
+    <span class="ticker-item">✦ 4.9★ Rated Service</span>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <p class="section-label reveal">Why Choose Spotles</p>
+  <h2 class="section-title reveal">THE SMARTER<br/>WAY TO CLEAN</h2>
+  <p class="section-desc reveal">We built Spotles because your time matters. Skip the queues, the traffic, the wait — we come to you.</p>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon">🕐</div>
+      <div class="why-title">Convenience First</div>
+      <div class="why-text">We clean your car while you focus on your day. Book in under 60 seconds, we handle the rest.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-1">
+      <div class="why-icon">🛡️</div>
+      <div class="why-title">Verified Drivers</div>
+      <div class="why-text">Every driver is background-verified and trained in professional car handling. Your car is safe with us.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-2">
+      <div class="why-icon">⚡</div>
+      <div class="why-title">Save Time</div>
+      <div class="why-text">No more waiting at car wash lines. We pick up, clean at our partner center, and return your car.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-3">
+      <div class="why-icon">✨</div>
+      <div class="why-title">Pro-Grade Results</div>
+      <div class="why-text">Partner-certified washing centers with professional equipment. Showroom finish every time.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-4">
+      <div class="why-icon">🏠</div>
+      <div class="why-title">No Visit Needed</div>
+      <div class="why-text">Stay home, stay at work, go for a run — your car gets cleaned and delivered back to you.</div>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">📍</div>
+      <div class="why-title">All of Guwahati</div>
+      <div class="why-text">We cover all major areas across Guwahati. Free pickup and drop included in every service.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label reveal">Our Services</p>
+  <h2 class="section-title reveal">FIND YOUR<br/>PERFECT CLEAN</h2>
+  <p class="section-desc reveal">From a quick refresh to a full restoration — we've got every car and every budget covered.</p>
+
+  <div class="services-grid">
+
+    <!-- Basic -->
+    <div class="service-card reveal">
+      <div class="service-icon-wrap">
+        <div class="service-icon">🚿</div>
+        <div>
+          <div class="service-title">Basic Car Wash</div>
+          <div class="service-subtitle">Quick & clean refresh</div>
+        </div>
+      </div>
+      <div class="service-body">
+        <ul class="service-features">
+          <li>Exterior foam wash</li>
+          <li>Wheel & tyre cleaning</li>
+          <li>Window wipe-down</li>
+          <li>Quick dry & finish</li>
+          <li>Free pickup & drop</li>
+        </ul>
+        <div class="service-price">
+          <span class="price-currency">₹</span>
+          <span class="price-amount">449</span>
+        </div>
+        <button class="service-book" onclick="bookService('Basic Car Wash – ₹449')">Book This →</button>
+      </div>
+    </div>
+
+    <!-- Standard -->
+    <div class="service-card featured reveal reveal-delay-1">
+      <div class="service-badge">Most Popular</div>
+      <div class="service-icon-wrap">
+        <div class="service-icon">🚗</div>
+        <div>
+          <div class="service-title">Standard Car Wash</div>
+          <div class="service-subtitle">Exterior + interior cleaning</div>
+        </div>
+      </div>
+      <div class="service-body">
+        <ul class="service-features">
+          <li>Full exterior foam wash</li>
+          <li>Interior vacuuming</li>
+          <li>Dashboard & console wipe</li>
+          <li>Seat & carpet cleaning</li>
+          <li>Window cleaning (in & out)</li>
+          <li>Free pickup & drop</li>
+        </ul>
+        <div class="service-price">
+          <span class="price-currency">₹</span>
+          <span class="price-amount">549</span>
+        </div>
+        <button class="service-book" onclick="bookService('Standard Car Wash – ₹549')">Book This →</button>
+      </div>
+    </div>
+
+    <!-- Detailing -->
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon-wrap">
+        <div class="service-icon">💎</div>
+        <div>
+          <div class="service-title">Detailing Package</div>
+          <div class="service-subtitle">Wax · Rubbing · Polishing</div>
+        </div>
+      </div>
+      <div class="service-body">
+        <ul class="service-features">
+          <li>Full exterior deep wash</li>
+          <li>Clay bar treatment</li>
+          <li>Machine wax polish</li>
+          <li>Rubbing & compound</li>
+          <li>Full interior detailing</li>
+          <li>Ceramic coat (add-on available)</li>
+          <li>Free pickup & drop</li>
+        </ul>
+        <div class="service-price">
+          <span class="price-currency">₹</span>
+          <span class="price-amount">1599</span>
+          <span class="price-note">starting</span>
+        </div>
+        <button class="service-book" onclick="bookService('Car Detailing Package – from ₹1599')">Book This →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <p class="section-label reveal">The Process</p>
+  <h2 class="section-title reveal">HOW SPOTLES<br/>WORKS</h2>
+  <p class="section-desc reveal">Four simple steps from booking to a spotless car back at your door.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <div class="step-icon">📱</div>
+      <div class="step-title">Book Online</div>
+      <div class="step-text">Fill our quick form with your car details, service, and preferred time. Takes under 2 minutes.</div>
+    </div>
+    <div class="step reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <div class="step-icon">🚗</div>
+      <div class="step-title">We Pick Up</div>
+      <div class="step-text">Our verified driver arrives at your location at the scheduled time and picks up your car.</div>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <div class="step-icon">✨</div>
+      <div class="step-title">We Clean</div>
+      <div class="step-text">Your car is cleaned at our partner-certified center with professional equipment and expertise.</div>
+    </div>
+    <div class="step reveal reveal-delay-3">
+      <div class="step-num">04</div>
+      <div class="step-icon">🏠</div>
+      <div class="step-title">We Deliver</div>
+      <div class="step-text">Spotless car returned to your address. No trips, no queues, no stress. Just results.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PICKUP BANNER -->
+<div class="pickup-banner reveal">
+  <div class="pickup-text">
+    <h3>FREE PICKUP &amp; DROP — EVERYWHERE IN GUWAHATI</h3>
+    <p>We partner with certified car wash centers across Guwahati to ensure the best clean while keeping it convenient and affordable for you.</p>
+    <div class="pickup-chips">
+      <span class="chip">📍 Panjabari</span>
+      <span class="chip">📍 Dispur</span>
+      <span class="chip">📍 Beltola</span>
+      <span class="chip">📍 Paltan Bazaar</span>
+      <span class="chip">📍 Noonmati</span>
+      <span class="chip">📍 + More Areas</span>
+    </div>
+  </div>
+  <button class="pickup-cta" onclick="scrollToBooking()">Book Free Pickup →</button>
+</div>
+
+<!-- BOOKING FORM -->
+<section class="booking" id="booking">
+  <p class="section-label reveal">Book a Service</p>
+  <h2 class="section-title reveal">READY FOR A<br/>SPOTLESS RIDE?</h2>
+
+  <div class="booking-wrap">
+    <div class="booking-info reveal">
+      <h3>QUICK, EASY<br/>BOOKING</h3>
+      <p>Fill the form and we'll confirm your booking via WhatsApp or call within 30 minutes.</p>
+
+      <div class="info-point">
+        <div class="info-icon">🆓</div>
+        <div>
+          <div class="info-title">Free Pickup & Drop</div>
+          <div class="info-sub">Included with every service, no extra charge.</div>
+        </div>
+      </div>
+      <div class="info-point">
+        <div class="info-icon">⏰</div>
+        <div>
+          <div class="info-title">Flexible Scheduling</div>
+          <div class="info-sub">Morning, afternoon or evening slots available.</div>
+        </div>
+      </div>
+      <div class="info-point">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-title">Confirmation in 30 mins</div>
+          <div class="info-sub">We'll call or WhatsApp you to confirm your slot.</div>
+        </div>
+      </div>
+      <div class="info-point">
+        <div class="info-icon">💳</div>
+        <div>
+          <div class="info-title">Pay After Service</div>
+          <div class="info-sub">Cash or UPI accepted after car is delivered back.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card reveal reveal-delay-1">
+      <div class="form-title">BOOK YOUR WASH</div>
+      <div class="form-subtitle">All fields required · We'll confirm within 30 mins</div>
+
+      <div class="form-alert" id="formAlert"></div>
+
+      <form id="bookingForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">Full Name *</label>
+            <input class="form-input" type="text" id="fname" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fmobile">Mobile Number *</label>
+            <input class="form-input" type="tel" id="fmobile" name="mobile" placeholder="+91 XXXXX XXXXX" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="faddress">Pickup Address *</label>
+          <input class="form-input" type="text" id="faddress" name="address" placeholder="Enter your full address or paste Google Maps link" required />
+          <div class="location-hint">
+            Tip: <a href="https://maps.google.com" target="_blank" rel="noopener">Open Google Maps</a>, copy your location link and paste above.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fservice">Select Service *</label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="fservice" name="service" required>
+              <option value="">-- Choose a service --</option>
+              <option value="Basic Car Wash – ₹449">Basic Car Wash – ₹449</option>
+              <option value="Standard Car Wash (with Interior) – ₹549">Standard Car Wash (with Interior) – ₹549</option>
+              <option value="Car Detailing Package – from ₹1599">Car Detailing Package – from ₹1599</option>
+              <option value="Wax Polish – from ₹1599">Wax Polish – from ₹1599</option>
+              <option value="Rubbing & Compound Polish – from ₹1599">Rubbing &amp; Compound Polish – from ₹1599</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fcar">Car Brand / Name *</label>
+            <input class="form-input" type="text" id="fcar" name="carName" placeholder="e.g. Maruti, Hyundai" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fmodel">Car Model *</label>
+            <input class="form-input" type="text" id="fmodel" name="carModel" placeholder="e.g. Swift, i20" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fdate">Preferred Date *</label>
+            <input class="form-input" type="date" id="fdate" name="date" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ftime">Preferred Time *</label>
+            <div class="form-select-wrap">
+              <select class="form-select" id="ftime" name="time" required>
+                <option value="">-- Select time slot --</option>
+                <option>8:00 AM – 10:00 AM</option>
+                <option>10:00 AM – 12:00 PM</option>
+                <option>12:00 PM – 2:00 PM</option>
+                <option>2:00 PM – 4:00 PM</option>
+                <option>4:00 PM – 6:00 PM</option>
+                <option>6:00 PM – 8:00 PM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="form-submit" id="submitBtn">
+          Confirm Booking →
+        </button>
+        <p class="form-note">🔒 Your details are secure. We never share your information.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Spot<span>les</span></div>
+      <p class="footer-desc">Premium car wash & detailing with free pickup and drop across Guwahati. We pick, we clean, we deliver.</p>
+      <div class="footer-contact">
+        <a href="tel:+91XXXXXXXXXX">📞 +91 XXXXX XXXXX</a>
+        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+        <a href="mailto:hello@spotles.in">✉️ hello@spotles.in</a>
+        <a href="#">📍 Guwahati, Assam</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Basic Car Wash</a></li>
+        <li><a href="#services">Standard Wash</a></li>
+        <li><a href="#services">Car Detailing</a></li>
+        <li><a href="#services">Wax & Polish</a></li>
+        <li><a href="#services">Rubbing & Compound</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#why">Why Spotles</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#booking">Book a Wash</a></li>
+        <li><a href="#">Partner Centers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 Spotles. All rights reserved. Guwahati, Assam.</p>
+    <p class="footer-partner">🤝 Partner-certified <span>washing centers</span> across Guwahati</p>
+  </div>
+</footer>
+
+<script>
+  // ── CONFIG: Replace with your Google Apps Script Web App URL ──
+  // Instructions:
+  // 1. Go to Google Sheets → Extensions → Apps Script
+  // 2. Paste the Apps Script code (see README note below)
+  // 3. Deploy as Web App → Anyone can access → Copy URL here
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFgd1Oyq-qaWgaSrmFH3LoirsqRfViKVMeCEaFQL4hziThokwg3bTKfsH5GnZHwFSq/exec';
+
+  // ── NAV SCROLL ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // ── HAMBURGER ──
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function closeMenu() { mobileMenu.classList.remove('open'); }
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+
+  // ── SCROLL TO BOOKING ──
+  function scrollToBooking() {
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ── PRE-SELECT SERVICE FROM CARD BUTTONS ──
+  function bookService(svc) {
+    document.getElementById('fservice').value = svc;
+    scrollToBooking();
+  }
+
+  // ── SET MIN DATE ──
+  const dateInput = document.getElementById('fdate');
+  const today = new Date();
+  today.setDate(today.getDate() + 1);
+  dateInput.min = today.toISOString().split('T')[0];
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── FORM SUBMISSION ──
+  const form = document.getElementById('bookingForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const alert = document.getElementById('formAlert');
+
+  function showAlert(type, msg) {
+    alert.className = 'form-alert ' + type;
+    alert.innerHTML = (type === 'success' ? '✅ ' : '❌ ') + msg;
+    alert.style.display = 'flex';
+    alert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    alert.style.display = 'none';
+
+    const name = form.name.value.trim();
+    const mobile = form.mobile.value.trim();
+    const address = form.address.value.trim();
+    const service = form.service.value;
+    const carName = form.carName.value.trim();
+    const carModel = form.carModel.value.trim();
+    const date = form.date.value;
+    const time = form.time.value;
+
+    if (!name || !mobile || !address || !service || !carName || !carModel || !date || !time) {
+      showAlert('error', 'Please fill in all required fields.');
+      return;
+    }
+    if (!/^[6-9]\d{9}$/.test(mobile.replace(/[\s\+\-]/g, ''))) {
+      showAlert('error', 'Please enter a valid 10-digit Indian mobile number.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span>Booking...';
+
+    const payload = { name, mobile, address, service, carName, carModel, date, time,
+      submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) };
+
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+      // Demo mode — simulate success
+      await new Promise(r => setTimeout(r, 1400));
+      showAlert('success', `Booking received, ${name}! We'll confirm via WhatsApp/call within 30 minutes.`);
+      form.reset();
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Confirm Booking →';
+      return;
+    }
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      showAlert('success', `Booking received, ${name}! We'll confirm via WhatsApp/call within 30 minutes.`);
+      form.reset();
+    } catch (err) {
+      showAlert('error', 'Something went wrong. Please call or WhatsApp us directly.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Confirm Booking →';
+    }
+  });
+</script>
+
+<!--
+=== GOOGLE APPS SCRIPT SETUP ===
+1. Open your Google Sheet → Extensions → Apps Script
+2. Paste this code and click Save + Deploy as Web App (Anyone):
+
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+    // Add header row if sheet is empty
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['Timestamp', 'Name', 'Mobile', 'Address', 'Service', 'Car Name', 'Car Model', 'Date', 'Time Slot']);
+    }
+    sheet.appendRow([
+      data.submittedAt,
+      data.name,
+      data.mobile,
+      data.address,
+      data.service,
+      data.carName,
+      data.carModel,
+      data.date,
+      data.time
+    ]);
+    return ContentService.createTextOutput(JSON.stringify({status:'ok'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({status:'error', message: err.message}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+3. Copy the Web App URL and replace 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' in the JS above.
+-->
+</body>
+</html>
