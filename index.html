@@ -1253,7 +1253,7 @@
   // 1. Go to Google Sheets → Extensions → Apps Script
   // 2. Paste the Apps Script code (see README note below)
   // 3. Deploy as Web App → Anyone can access → Copy URL here
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFkST0Jk8hSh8MjUGi1FbQunXyV8VACbskwjUYuCv9y1czCSjxyRlzW6rA9wV0rgsC/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynV-xT0LoY81wgZV-RPS_mTG6YIMk8nAjt-1Iq5TUb30kZoLtUspXN00E6Yi2OZdV-/exec';
 
   // ── NAV SCROLL ──
   const navbar = document.getElementById('navbar');
@@ -1338,7 +1338,7 @@
     const payload = { name, mobile, address, service, carName, carModel, date, time,
       submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) };
 
-    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbyFkST0Jk8hSh8MjUGi1FbQunXyV8VACbskwjUYuCv9y1czCSjxyRlzW6rA9wV0rgsC/exec') {
+    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbynV-xT0LoY81wgZV-RPS_mTG6YIMk8nAjt-1Iq5TUb30kZoLtUspXN00E6Yi2OZdV-/exec') {
       // Demo mode — simulate success
       await new Promise(r => setTimeout(r, 1400));
       showAlert('success', `Booking received, ${name}! We'll confirm via WhatsApp/call within 30 minutes.`);
